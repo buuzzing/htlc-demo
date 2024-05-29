@@ -4,63 +4,9 @@ pragma solidity ^0.8.24;
 
 import {IERC20} from "./IERC20.sol";
 
-abstract contract ERC20 is IERC20 {
-    uint256 private _totalSupply;
-
-    string private _name;
-    string private _symbol;
-
+contract ERC20 is IERC20 {
     mapping(address => uint256) private _balances;
     mapping(address => mapping(address => uint256)) private _allowances;
-
-    /**
-     * 设置发行量 {totalSupply}，名称 {name}，符号 {symbol}
-     */
-    constructor(
-        uint256 totalSupply_,
-        string memory name_,
-        string memory symbol_
-    ) {
-        _totalSupply = totalSupply_;
-
-        _name = name_;
-        _symbol = symbol_;
-    }
-
-    /**
-     * 返回代币的名称
-     */
-    function name() public view returns (string memory) {
-        return _name;
-    }
-
-    /**
-     * 返回代币的符号/简称
-     */
-    function symbol() public view returns (string memory) {
-        return _symbol;
-    }
-
-    /**
-     * 返回小数位，ERC20 标准
-     */
-    function decimals() public pure returns (uint8) {
-        return 18;
-    }
-
-    /**
-     * 返回代币的发行总量
-     */
-    function totalSupply() public view returns (uint256) {
-        return _totalSupply;
-    }
-
-    /**
-     * 返回账户代币数量
-     */
-    function balanceOf(address account) public view returns (uint256) {
-        return _balances[account];
-    }
 
     /**
      * 转移代币
@@ -84,16 +30,6 @@ abstract contract ERC20 is IERC20 {
         emit Transfer(msg.sender, to, value);
 
         return true;
-    }
-
-    /**
-     * 返回 `spender` 可以从 `owner` 转移的代币数量
-     */
-    function allowance(
-        address owner,
-        address spender
-    ) public view override returns (uint256) {
-        return _allowances[owner][spender];
     }
 
     /**

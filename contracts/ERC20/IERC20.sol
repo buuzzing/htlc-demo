@@ -23,16 +23,6 @@ interface IERC20 {
     );
 
     /**
-     * 代币发行总数
-     */
-    function totalSupply() external view returns (uint256);
-
-    /**
-     * `owner` 拥有的代币数量
-     */
-    function balanceOf(address owner) external view returns (uint256);
-
-    /**
      * `msg.sender` 向 `to` 转移 `value` 个代币
      *
      * 返回转移操作是否成功
@@ -40,14 +30,6 @@ interface IERC20 {
      * 触发 {Transfer} 事件
      */
     function transfer(address to, uint256 value) external returns (bool);
-
-    /**
-     * `owner` 授权 `spender` 可以转移的代币数量，通过 {transferFrom} 操作
-     */
-    function allowance(
-        address owner,
-        address spender
-    ) external view returns (uint256);
 
     /**
      * `msg.sender` 授权 `spender` 可以转移 `value` 个代币
