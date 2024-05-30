@@ -23,7 +23,6 @@ contract HTLC {
     event Locked(
         bytes32 indexed hashValue,
         uint unlockTime,
-        uint curTime,
         uint amount,
         address senderAddr,
         address tokenAddr,
@@ -37,7 +36,6 @@ contract HTLC {
         bytes preImage,
         bytes32 indexed hashValue,
         uint unlockTime,
-        uint curTime,
         uint amount,
         address senderAddr,
         address tokenAddr,
@@ -50,7 +48,6 @@ contract HTLC {
     event Retrieve(
         bytes32 indexed hashValue,
         uint unlockTime,
-        uint curTime,
         uint amount,
         address senderAddr,
         address tokenAddr,
@@ -102,7 +99,6 @@ contract HTLC {
         emit Locked(
             hashValue,
             unlockTime,
-            block.timestamp,
             amount,
             msg.sender,
             tokenAddr,
@@ -148,7 +144,6 @@ contract HTLC {
             preImage,
             hashValue,
             l.unlockTime,
-            block.timestamp,
             l.amount,
             l.senderAddr,
             l.tokenAddr,
@@ -192,7 +187,6 @@ contract HTLC {
         emit Retrieve(
             hashValue,
             l.unlockTime,
-            block.timestamp,
             l.amount,
             l.senderAddr,
             l.tokenAddr,
