@@ -23,6 +23,11 @@ interface IERC20 {
     );
 
     /**
+     * `owner` 拥有的代币数量
+     */
+    function balanceOf(address owner) external view returns (uint256);
+
+    /**
      * `msg.sender` 向 `to` 转移 `value` 个代币
      *
      * 返回转移操作是否成功

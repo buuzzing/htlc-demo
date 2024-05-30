@@ -14,6 +14,13 @@ contract ERC20 is IERC20 {
     constructor() {
         _balances[msg.sender] = 1000;
     }
+
+    /**
+     * 返回 `owner` 拥有的代币数量
+     */
+    function balanceOf(address owner) public override view returns (uint256) {
+        return _balances[owner];
+    }
     
     /**
      * 转移代币
