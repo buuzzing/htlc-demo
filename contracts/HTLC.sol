@@ -82,6 +82,9 @@ contract HTLC {
         IERC20 token = IERC20(tokenAddr);
 
         // 尝试锁定代币
+        // 如果发生错误，事件实际上是由 ERC20 代币合约触发的
+        // 不会执行输出下面这行错误语句
+        // 在 unlock 和 retrieve 函数中也是一样
         require(
             token.transferFrom(msg.sender, address(this), amount),
             "HTLC: ERC20 token transfer failed when locking"
@@ -137,9 +140,6 @@ contract HTLC {
             "HTLC: ERC20 token transfer failed when claiming"
         );
 
-        // 只有成功解锁代币后，才会删除锁定状态
-        delete locks[hashValue];
-
         emit Unlocked(
             preImage,
             hashValue,
@@ -149,6 +149,9 @@ contract HTLC {
             l.tokenAddr,
             l.receiverAddr
         );
+
+        // 只有成功解锁代币后，才会删除锁定状态
+        delete locks[hashValue];
     }
 
     /**
@@ -181,9 +184,6 @@ contract HTLC {
             "HTLC: ERC20 token transfer failed when retrieving"
         );
 
-        // 只有成功取回代币后，才会删除锁定状态
-        delete locks[hashValue];
-
         emit Retrieve(
             hashValue,
             l.unlockTime,
@@ -192,5 +192,8 @@ contract HTLC {
             l.tokenAddr,
             l.receiverAddr
         );
+
+        // 只有成功取回代币后，才会删除锁定状态
+        delete locks[hashValue];
     }
 }
