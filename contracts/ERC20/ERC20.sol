@@ -9,6 +9,13 @@ contract ERC20 is IERC20 {
     mapping(address => mapping(address => uint256)) private _allowances;
 
     /**
+     * 为进行测试，将代币分配给部署合约的地址
+     */
+    constructor() {
+        _balances[msg.sender] = 1000;
+    }
+    
+    /**
      * 转移代币
      *
      * - `to` 不能为 0 地址
