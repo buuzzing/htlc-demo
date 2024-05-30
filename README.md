@@ -48,6 +48,18 @@ Hardhat 测试出错的提示非常友好，举个栗子
 Node.js >= 16.0
 ```
 
+## Hardhat 项目结构
+
+`contracts`：合约文件夹，里面可以随意创建子文件夹和 import，测试文件那边使用合约名进行调用
+
+`test`：测试代码文件夹，执行 `npx hardhat test` 将会执行这下面的代码，使用的是 `Mocha` 的风格
+
+`hardhat.config.ts`：自动生成的，项目配置文件，指定了 `solidity` 的版本
+
+`package.json` 和 `package-lock.json`：自动生成的，Node 项目依赖包
+
+`tsconfig.json`：自动生成的，TypeScript 项目配置文件，提供给 Node 的编译选项
+
 ## 启动
 
 环境搭建
@@ -56,10 +68,16 @@ Node.js >= 16.0
 npm install
 ```
 
-运行测试
+运行测试（会自动编译合约）
 
 ``` shell
 npx hardhat test
+```
+
+编译合约
+
+``` shell
+npx hardhat compile
 ```
 
 ## 参考
